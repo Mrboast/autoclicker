@@ -15,6 +15,7 @@ public class AirClickerMod implements ClientModInitializer {
     public static KeyBinding toggleKey;
     public static KeyBinding menuKey;
     private static long nextClick = 0;
+    private static boolean prevPauseOnLostFocus = true;
 
     @Override
     public void onInitializeClient() {
@@ -39,11 +40,20 @@ public class AirClickerMod implements ClientModInitializer {
     }
 
     public static void start() {
+        MinecraftClient mc = MinecraftClient.getInstance();
+        if (!running) {
+            // Evita que el juego se pause al perder el foco (para que siga clicando en segundo plano).
+            prevPauseOnLostFocus = mc.options.pauseOnLostFocus;
+            mc.options.pauseOnLostFocus = false;
+        }
         running = true;
         nextClick = System.currentTimeMillis() + (long) (ClickerConfig.intervalSeconds * 1000);
     }
 
     public static void stop() {
+        if (running) {
+            MinecraftClient.getInstance().options.pauseOnLostFocus = prevPauseOnLostFocus;
+        }
         running = false;
     }
 
@@ -70,7 +80,6 @@ public class AirClickerMod implements ClientModInitializer {
             return;
         }
         if (now >= nextClick) {
-            // Simula una pulsación de la tecla de ataque (clic izquierdo).
             KeyBinding.onKeyPressed(InputUtil.fromTranslationKey(mc.options.attackKey.getBoundKeyTranslationKey()));
             nextClick = now + (long) (ClickerConfig.intervalSeconds * 1000);
         }
