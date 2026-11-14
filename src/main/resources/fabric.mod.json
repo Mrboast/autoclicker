@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "airclicker",
+  "version": "${version}",
+  "name": "Air AutoClicker",
+  "description": "Autoclick simple (clic al aire) con intervalo configurable de 0.8 s a 3 min.",
+  "authors": ["Tú"],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["com.airclicker.AirClickerMod"]
+  },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "minecraft": "~1.21.1",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
