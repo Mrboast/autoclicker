@@ -11,3 +11,4 @@ Clic izquierdo automático "al aire". Sin aim assist ni movimiento de cámara.
 2. Si no tienes el wrapper de Gradle: `gradle wrapper --gradle-version 8.8` (o copia el wrapper de la plantilla de https://fabricmc.net/develop/template).
 3. `./gradlew build` → el .jar queda en `build/libs/`.
 4. Ponlo en `.minecraft/mods` junto a Fabric API.
+Hecho por mrboast
